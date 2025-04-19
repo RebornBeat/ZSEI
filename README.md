@@ -45,7 +45,89 @@ The current version focuses primarily on Rust code analysis, with plans to expan
 
 - Rust 1.73.0 or higher
 - Cargo
+- ONNX Runtime (for LLM inference)
+- Tree-sitter (for code parsing)
 - Optional: Phi-4 Mini (or compatible) for local inference
+
+### Install Rust and Cargo (if not already installed)
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+```
+
+### Install ONNX Runtime
+
+```bash
+# Create a directory for ONNX Runtime
+mkdir -p ~/onnxruntime
+cd ~/onnxruntime
+
+# Download the Linux version
+wget https://github.com/microsoft/onnxruntime/releases/download/v1.21.0/onnxruntime-linux-x64-1.21.0.tgz
+
+# Extract it
+tar xzf onnxruntime-linux-x64-1.21.0.tgz
+
+# Set up environment variables (add these to your ~/.bashrc)
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/onnxruntime/onnxruntime-linux-x64-1.21.0/lib' >> ~/.bashrc
+echo 'export LIBRARY_PATH=$LIBRARY_PATH:~/onnxruntime/onnxruntime-linux-x64-1.21.0/lib' >> ~/.bashrc
+echo 'export ONNXRUNTIME_LIB_PATH=~/onnxruntime/onnxruntime-linux-x64-1.21.0/lib' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Install Tree-Sitter CLI
+
+```bash
+# Install the CLI tool
+cargo install tree-sitter-cli
+
+# Add cargo bin to your PATH (if not already done)
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# Initialize Tree-Sitter configuration
+tree-sitter init-config
+
+# Create directory for Tree-Sitter parsers
+mkdir -p ~/.tree-sitter/grammars
+
+# Clone the Rust grammar
+git clone https://github.com/tree-sitter/tree-sitter-rust.git ~/.tree-sitter/grammars/tree-sitter-rust
+
+# Configure Tree-Sitter
+mkdir -p ~/.config/tree-sitter
+cat > ~/.config/tree-sitter/config.json << 'EOF'
+{
+  "parser-directories": [
+    "~/.tree-sitter/grammars"
+  ]
+}
+EOF
+```
+
+### Download Phi-4 Mini Model
+
+```bash
+# Create a virtual environment
+python -m venv hf_env
+
+# Activate the virtual environment
+source hf_env/bin/activate
+
+# Install huggingface_hub
+pip install huggingface_hub
+
+# Download the model files
+mkdir -p ~/models/phi-4-mini
+huggingface-cli download microsoft/Phi-4-mini-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir ~/models/phi-4-mini
+
+# Get additional tokenizer files
+wget -O ~/models/phi-4-mini/tokenizer.json https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/tokenizer.json
+wget -O ~/models/phi-4-mini/special_tokens_map.json https://huggingface.co/microsoft/Phi-4-mini-instruct/resolve/main/special_tokens_map.json
+
+# Deactivate the virtual environment when done
+deactivate
+```
 
 ### From Source
 
@@ -59,3 +141,117 @@ cargo build --release
 
 # Install the binary
 cargo install --path .
+```
+
+## Usage
+
+### Basic Commands
+
+```bash
+# Initialize a project
+zsei init [--path PATH]
+
+# Analyze a project
+zsei analyze --progress
+
+# Index a project for searching
+zsei index --progress
+
+# Query the indexed project
+zsei query "your query here" [--max-results 10]
+
+# Run a refactoring operation
+zsei refactor "fix error in function X" [--branches 5]
+
+# Run the full analysis-refactoring loop
+zsei run "optimize error handling" [--iterations 3]
+```
+
+## Example Workflow
+
+### Initialize the project
+
+```bash
+cd /path/to/your/project
+zsei init
+```
+
+### Run a complete analysis-refactoring loop
+
+```bash
+zsei run "fix the error where LinuxProcessMonitor cannot be found in linux module"
+```
+
+### Review and select the best branch of changes
+
+### Let the tool apply those changes and continue iterating
+
+## Configuration
+
+The configuration is stored in the .zsei/config.toml file in your project directory. You can modify this file to customize the behavior of ZSEI.
+
+### Example configuration
+
+```bash
+[llm]
+model_type = "PhiMini"
+model_path = "/path/to/phi-mini-model"
+
+[embedding]
+dimension = 384
+chunk_size = 1024
+chunk_overlap = 128
+
+[indexing]
+vector_store_type = "Hnsw"
+store_metadata = true
+store_content = true
+include_extensions = ["rs", "py", "js", "ts"]
+exclude_patterns = ["**/target/**", "**/node_modules/**", "**/.git/**"]
+
+[refactor]
+num_branches = 5
+keep_iterations = 3
+auto_apply = false
+max_modified_files = 50
+```
+
+## Architecture
+
+ZSEI is built with a modular architecture that separates concerns and allows for easy extension:
+
+Analyzers: Language-specific code analyzers for extracting structural information
+Embedding: Zero-Shot Bolted Embedding generation and management
+Indexing: Vector storage and retrieval for efficient searching
+Query: Natural language query processing and context building
+Refactoring: Code optimization and transformation based on LLM suggestions
+Core: Project and configuration management
+CLI: Command-line interface for user interaction
+
+## Future Expansion
+
+While the current version focuses on Rust code analysis, future versions will add:
+
+- Support for more programming languages
+- Image analysis and embedding
+- Audio analysis and embedding
+- Video analysis and embedding
+- Cross-modal search and understanding
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+- Fork the repository
+- Create your feature branch (git checkout -b feature/amazing-feature)
+- Commit your changes (git commit -m 'Add some amazing feature')
+- Push to the branch (git push origin feature/amazing-feature)
+- Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Learn More
+
+Visit ZSEI.xyz for more information, documentation, and updates.
