@@ -4,20 +4,37 @@ A revolutionary multi-modal analysis and search framework that combines precise 
 
 ## Overview
 
-ZSEI is a powerful tool for analyzing, indexing, and optimizing code that leverages Small Language Models (SLMs) and/or Large Language Models (LLMs) for enhanced understanding. Using a "zero-shot bolted embedding" approach, it can provide deep insights into your codebase without requiring extensive training data.
+ZSEI is a powerful tool for analyzing, indexing, and optimizing code that leverages Small Language Models (SLMs) and/or Large Language Models (LLMs) for enhanced understanding. Using a "zero-shot bolted embedding" approach, it provides deep insights into your codebase without requiring extensive training data.
+
+The system works through a multi-phase approach that continuously refines its understanding and optimizations:
+
+1. **Initialization Phase**: Thoroughly analyzes and indexes your project
+2. **Prompt Analysis Phase**: Identifies relevant code based on natural language queries 
+3. **Refactoring Phase**: Creates multiple optimization approaches with explanations
+4. **Continuous Refinement**: Iteratively improves code through feedback loops
 
 The current version focuses primarily on Rust code analysis, with plans to expand to other programming languages and modalities (image, audio, video) in future releases.
 
 ## Key Features
 
+### Comprehensive Analysis System
+
+- **Function-Level Dependency Tracking**: Captures relationships between functions across all modules
+- **Cross-Module Analysis**: Understands connections and patterns across different parts of your codebase
+- **Progressive Multi-Pass Analysis**: Refines understanding with increasing detail levels in each pass
+- **Memory-Efficient Processing**: Handles codebases of unlimited size through streaming and adaptive chunking
+- **LLM-Driven Semantic Understanding**: Leverages language models for deeper code comprehension
+
 ### Initialization Phase (Project Codebase Analysis)
+
 - Thoroughly analyzes and indexes the target project codebase
 - Recursively processes all code files in the specified project directory
 - Extracts comprehensive metadata about structure, components, and relationships
 - Maps out the full functionality to ensure nothing is missed
-- Prioritizes completeness and accuracy
+- Creates a prioritized understanding of your code's organization
 
 ### Phase 1 (Prompt Analysis)
+
 - Accepts natural language queries describing coding tasks, issues, or optimizations
 - Identifies all code relevant to addressing the prompt
 - Loads complete context around relevant code components
@@ -26,6 +43,7 @@ The current version focuses primarily on Rust code analysis, with plans to expan
 - Updates the prompt based on error output
 
 ### Phase 2 (Code Refactoring)
+
 - Creates multiple branch versions with different refactoring approaches
 - Analyzes each branch for code quality, efficiency, and functionality preservation
 - Provides clear explanations of changes and their benefits
@@ -33,10 +51,20 @@ The current version focuses primarily on Rust code analysis, with plans to expan
 - Preserves original metadata while creating updated versions
 - Supports interactive review of changes
 
+### Dependency Intelligence
+
+- Automatically analyzes `Cargo.toml` and external dependencies
+- Identifies available functions in dependencies through documentation scraping
+- Detects version updates and API changes
+- Provides migration assistance for dependency updates
+- Optimizes dependency usage based on code patterns
+
 ### Continuous Loop
+
 - Runs Phases 1 and 2 iteratively, producing incremental optimizations
 - Automatically incorporates build feedback in each iteration
 - Maintains full history of code evolution
+- Provides checkpoints for resuming long-running analyses
 - Allows exporting at any point
 
 ## Installation
@@ -165,34 +193,63 @@ zsei refactor "fix error in function X" [--branches 5]
 
 # Run the full analysis-refactoring loop
 zsei run "optimize error handling" [--iterations 3]
+
+# Check and manage dependencies
+zsei dependency check
 ```
 
-## Example Workflow
+### Dependency Management
 
-### Initialize the project
+```bash
+# Check for dependency updates
+zsei dependency check
+
+# Generate migration plan for updates
+zsei dependency plan
+
+# Find available functions in a dependency
+zsei dependency functions serde
+
+# Apply dependency updates
+zsei dependency update
+```
+
+### Example Workflow
+
+#### Initialize the project
 
 ```bash
 cd /path/to/your/project
 zsei init
 ```
 
-### Run a complete analysis-refactoring loop
+#### Run a complete analysis-refactoring loop
 
 ```bash
 zsei run "fix the error where LinuxProcessMonitor cannot be found in linux module"
 ```
 
-### Review and select the best branch of changes
+#### Review and select the best branch of changes
 
-### Let the tool apply those changes and continue iterating
+```bash
+# After ZSEI presents multiple solution branches
+# You'll be prompted to select the most appropriate solution
+```
+
+#### Let the tool apply those changes and continue iterating
+
+```bash
+# ZSEI will apply the selected changes and continue the optimization process
+# You can interrupt at any point to review progress
+```
 
 ## Configuration
 
-The configuration is stored in the .zsei/config.toml file in your project directory. You can modify this file to customize the behavior of ZSEI.
+The configuration is stored in the `.zsei/config.toml` file in your project directory. You can modify this file to customize the behavior of ZSEI.
 
 ### Example configuration
 
-```bash
+```toml
 [llm]
 model_type = "PhiMini"
 model_path = "/path/to/phi-mini-model"
@@ -214,29 +271,54 @@ num_branches = 5
 keep_iterations = 3
 auto_apply = false
 max_modified_files = 50
+
+[analysis]
+# New configuration section for progressive analysis
+passes = 3                 # Number of analysis passes to perform
+memory_limit = "8GB"       # Maximum memory to use
+parallel_files = 4         # Number of files to process in parallel
+checkpoint_frequency = 10  # Create checkpoints after every N files
+
+[dependency]
+# New configuration section for dependency management
+scrape_docs = true         # Whether to scrape documentation for functions
+check_updates = true       # Automatically check for dependency updates
 ```
 
 ## Architecture
 
 ZSEI is built with a modular architecture that separates concerns and allows for easy extension:
 
-Analyzers: Language-specific code analyzers for extracting structural information
-Embedding: Zero-Shot Bolted Embedding generation and management
-Indexing: Vector storage and retrieval for efficient searching
-Query: Natural language query processing and context building
-Refactoring: Code optimization and transformation based on LLM suggestions
-Core: Project and configuration management
-CLI: Command-line interface for user interaction
+- **Analyzers**: Language-specific code analyzers for extracting structural information
+- **Embedding**: Zero-Shot Bolted Embedding generation and management
+- **Indexing**: Vector storage and retrieval for efficient searching
+- **Query**: Natural language query processing and context building
+- **Refactoring**: Code optimization and transformation based on LLM suggestions
+- **Dependency**: Dependency management and API tracking
+- **Core**: Project and configuration management
+- **CLI**: Command-line interface for user interaction
+
+### Progressive Analysis
+
+The system uses a multi-pass approach to analyze code:
+
+1. **Initial Pass**: Basic structure and relationships
+2. **Semantic Pass**: Deeper understanding of code meaning
+3. **Quality Pass**: Assessment of implementation quality and completeness
+4. **Optimization Pass**: Identification of improvement opportunities
+
+Each pass builds upon the previous, creating a progressively more detailed understanding of your codebase.
 
 ## Future Expansion
 
 While the current version focuses on Rust code analysis, future versions will add:
 
-- Support for more programming languages
+- Support for more programming languages (Python, JavaScript, TypeScript, Go, etc.)
 - Image analysis and embedding
 - Audio analysis and embedding
 - Video analysis and embedding
 - Cross-modal search and understanding
+- Enhanced dependency intelligence with automated migration
 
 ## Contributing
 
