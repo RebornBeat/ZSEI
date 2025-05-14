@@ -65,7 +65,7 @@ Display the status of all implementation blocks with color-coding:
 
 ### 3. Error Tracking
 
-Monitor and categorize implementation errors:
+Monitor and categorize implementation errors and identify any incomplete implementation's such as TODO's, simplified implementations which need to be copmleted no matter how copmlex, placeholders to complete etc.:
 
 ```markdown
 ## Error Tracking
