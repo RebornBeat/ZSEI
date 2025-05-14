@@ -98,7 +98,7 @@ Monitor and categorize implementation errors:
 
 ### 4. Quality Metrics
 
-Track code quality and testing metrics:
+Track code quality and testing metrics and identify any incomplete implementation's such as TODO's, simplified implementations which need to be copmleted no matter how copmlex, placeholders to complete etc. :
 
 ```markdown
 ## Quality Metrics
