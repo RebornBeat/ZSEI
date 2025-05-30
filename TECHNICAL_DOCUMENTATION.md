@@ -875,6 +875,323 @@ GET /api/v1/3d/search/{index_id}
     }
 ```
 
+#### Biomedical Genomics Framework API
+
+```rust
+// Comprehensive Genomic Analysis
+POST /api/v1/biomedical/analyze-genomic
+    Request: {
+        genomic_data: GenomicData,
+        patient_context: PatientContext,
+        analysis_config: ComprehensiveGenomicAnalysisConfig,
+        analysis_depth: AnalysisDepth
+    }
+    Response: {
+        job_id: JobId,
+        status: JobStatus,
+        estimated_completion: Option<DateTime<Utc>>,
+        analysis_scope: AnalysisScope
+    }
+
+// Biological Pattern Discovery
+POST /api/v1/biomedical/discover-patterns
+    Request: {
+        genomic_dataset: LargeGenomicDataset,
+        comprehensive_analyses: Vec<ComprehensiveGenomicSemanticAnalysis>,
+        pattern_discovery_config: BiologicalPatternDiscoveryConfig,
+        discovery_scope: PatternDiscoveryScope
+    }
+    Response: {
+        job_id: JobId,
+        status: JobStatus,
+        estimated_patterns: Option<usize>,
+        estimated_duration: Option<Duration>
+    }
+
+// Biological Execution Optimizer Generation
+POST /api/v1/biomedical/generate-optimizers
+    Request: {
+        comprehensive_analyses: Vec<ComprehensiveGenomicSemanticAnalysis>,
+        biological_patterns: BiologicalPatternsForEmbedding,
+        optimizer_generation_config: BiologicalOptimizerGenerationConfig,
+        target_platforms: Vec<ExecutionPlatformType>
+    }
+    Response: {
+        job_id: JobId,
+        status: JobStatus,
+        estimated_optimizers: Option<usize>,
+        estimated_completion: Option<DateTime<Utc>>
+    }
+
+// Biological Intelligence Storage Management
+POST /api/v1/biomedical/storage/configure
+    Request: {
+        storage_preferences: UserStoragePreferences,
+        storage_type: StorageType,
+        integration_config: Option<IntegrationConfig>
+    }
+    Response: {
+        storage_config_id: StorageConfigId,
+        storage_backend: StorageBackend,
+        configuration_status: ConfigurationStatus
+    }
+
+POST /api/v1/biomedical/storage/store-optimizers
+    Request: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        storage_config_id: StorageConfigId,
+        storage_metadata: StorageMetadata
+    }
+    Response: {
+        storage_result_id: StorageResultId,
+        storage_status: StorageStatus,
+        optimizers_stored: usize,
+        storage_size: u64
+    }
+
+GET /api/v1/biomedical/storage/retrieve-optimizers
+    Request: {
+        retrieval_request: OptimizerRetrievalRequest,
+        storage_config_id: StorageConfigId
+    }
+    Response: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        retrieval_metadata: RetrievalMetadata,
+        retrieval_time_ms: u64
+    }
+
+// Execution Platform Integration
+POST /api/v1/biomedical/execution-platform/integrate
+    Request: {
+        platform_type: ExecutionPlatformType,
+        integration_config: ExecutionPlatformIntegrationConfig,
+        authentication_config: PlatformAuthenticationConfig
+    }
+    Response: {
+        integration_session_id: IntegrationSessionId,
+        platform_status: PlatformStatus,
+        compatibility_assessment: CompatibilityAssessment
+    }
+
+POST /api/v1/biomedical/execution-platform/submit-optimizers
+    Request: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        integration_session_id: IntegrationSessionId,
+        submission_config: OptimizerSubmissionConfig
+    }
+    Response: {
+        submission_result_id: SubmissionResultId,
+        platform_optimizer_ids: Vec<PlatformOptimizerId>,
+        submission_status: SubmissionStatus,
+        biological_preservation_validation: BiologicalPreservationValidation
+    }
+
+POST /api/v1/biomedical/execution-platform/coordinate-execution
+    Request: {
+        genomic_analysis_request: GenomicAnalysisRequest,
+        integration_session_id: IntegrationSessionId,
+        execution_config: ExecutionCoordinationConfig
+    }
+    Response: {
+        execution_coordination_id: ExecutionCoordinationId,
+        execution_status: ExecutionStatus,
+        estimated_completion: Option<DateTime<Utc>>
+    }
+
+// NanoFlowSIM Integration
+POST /api/v1/biomedical/nanoflowsim/integrate-comprehensive
+    Request: {
+        nanoflowsim_simulation: NanoFlowSimSimulation,
+        biological_optimizers: BiologicalExecutionOptimizerCollection,
+        patient_genomic_profile: PatientGenomicProfile,
+        integration_config: ComprehensiveIntegrationConfig
+    }
+    Response: {
+        integration_job_id: JobId,
+        integration_status: IntegrationStatus,
+        estimated_completion: Option<DateTime<Utc>>,
+        integration_scope: IntegrationScope
+    }
+
+POST /api/v1/biomedical/nanoflowsim/enhance-molecular-layer
+    Request: {
+        molecular_layer: MolecularLayer,
+        biological_optimizers: BiologicalExecutionOptimizerCollection,
+        genomic_context: GenomicContext,
+        enhancement_config: MolecularEnhancementConfig
+    }
+    Response: {
+        enhancement_job_id: JobId,
+        enhancement_status: EnhancementStatus,
+        biological_intelligence_applied: BiologicalIntelligenceMetrics
+    }
+
+POST /api/v1/biomedical/nanoflowsim/integrate-multi-layer
+    Request: {
+        nanoflowsim_layers: NanoFlowSimLayers,
+        biological_optimizers: BiologicalExecutionOptimizerCollection,
+        patient_profile: PatientOmicsSemanticIntegration,
+        multi_layer_config: MultiLayerIntegrationConfig
+    }
+    Response: {
+        multi_layer_integration_id: JobId,
+        integration_status: IntegrationStatus,
+        layers_enhanced: Vec<LayerEnhancementResult>
+    }
+
+// Genomic Embedding Generation
+POST /api/v1/biomedical/embeddings/generate-genomic
+    Request: {
+        genomic_sequence: GenomicSequence,
+        functional_context: FunctionalContext,
+        patient_context: PatientContext,
+        embedding_config: GenomicEmbeddingConfig
+    }
+    Response: {
+        embedding_job_id: JobId,
+        embedding_status: EmbeddingStatus,
+        optimizer_generation: bool,
+        estimated_completion: Option<DateTime<Utc>>
+    }
+
+POST /api/v1/biomedical/embeddings/generate-biological-patterns
+    Request: {
+        biological_patterns: BiologicalPatternsForEmbedding,
+        embedding_config: BiologicalPatternEmbeddingConfig,
+        compression_config: CompressionConfig
+    }
+    Response: {
+        pattern_embedding_job_id: JobId,
+        embedding_status: EmbeddingStatus,
+        pattern_count: usize,
+        compression_ratio: Option<f32>
+    }
+
+// Analytics and Reporting
+POST /api/v1/biomedical/analytics/analyze-intelligence-quality
+    Request: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        analysis_config: IntelligenceQualityAnalysisConfig,
+        validation_scope: ValidationScope
+    }
+    Response: {
+        analysis_job_id: JobId,
+        analysis_status: AnalysisStatus,
+        quality_metrics_preview: Option<QualityMetricsPreview>
+    }
+
+POST /api/v1/biomedical/analytics/analyze-performance-impact
+    Request: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        execution_results: Vec<ExecutionPlatformResults>,
+        impact_analysis_config: PerformanceImpactAnalysisConfig
+    }
+    Response: {
+        impact_analysis_job_id: JobId,
+        analysis_status: AnalysisStatus,
+        performance_metrics_preview: Option<PerformanceMetricsPreview>
+    }
+
+POST /api/v1/biomedical/reports/generate-comprehensive
+    Request: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        execution_results: Vec<ExecutionPlatformResults>,
+        report_config: ComprehensiveReportConfig,
+        output_formats: Vec<OutputFormat>
+    }
+    Response: {
+        report_generation_job_id: JobId,
+        generation_status: GenerationStatus,
+        estimated_completion: Option<DateTime<Utc>>,
+        output_formats: Vec<OutputFormat>
+    }
+
+POST /api/v1/biomedical/dashboards/create-interactive
+    Request: {
+        optimizers: BiologicalExecutionOptimizerCollection,
+        execution_results: Vec<ExecutionPlatformResults>,
+        dashboard_config: InteractiveDashboardConfig,
+        real_time_updates: bool
+    }
+    Response: {
+        dashboard_id: DashboardId,
+        dashboard_url: String,
+        dashboard_status: DashboardStatus,
+        real_time_enabled: bool
+    }
+
+// Optimizer Management
+GET /api/v1/biomedical/optimizers
+    Query Parameters: {
+        optimizer_type: Option<OptimizerType>,
+        platform_compatibility: Option<ExecutionPlatformType>,
+        biological_domain: Option<BiologicalDomain>,
+        creation_date_range: Option<DateRange>,
+        quality_threshold: Option<f32>
+    }
+    Response: {
+        optimizers: Vec<BiologicalOptimizerSummary>,
+        total_count: usize,
+        filtered_count: usize,
+        quality_distribution: QualityDistribution
+    }
+
+GET /api/v1/biomedical/optimizers/{optimizer_id}
+    Response: {
+        optimizer: BiologicalExecutionOptimizer,
+        metadata: OptimizerMetadata,
+        performance_metrics: OptimizerPerformanceMetrics,
+        validation_results: ValidationResults,
+        biological_intelligence_summary: BiologicalIntelligenceSummary
+    }
+
+PUT /api/v1/biomedical/optimizers/{optimizer_id}/validate
+    Request: {
+        validation_config: OptimizerValidationConfig,
+        validation_scope: ValidationScope
+    }
+    Response: {
+        validation_job_id: JobId,
+        validation_status: ValidationStatus,
+        estimated_completion: Option<DateTime<Utc>>
+    }
+
+DELETE /api/v1/biomedical/optimizers/{optimizer_id}
+    Response: {
+        deletion_status: DeletionStatus,
+        cleanup_results: CleanupResults
+    }
+
+// Export and Import
+POST /api/v1/biomedical/export/optimizers
+    Request: {
+        optimizer_collection: BiologicalExecutionOptimizerCollection,
+        export_format: ExportFormat,
+        platform_compatibility: Vec<ExecutionPlatformType>,
+        compression_enabled: bool
+    }
+    Response: {
+        export_job_id: JobId,
+        export_status: ExportStatus,
+        estimated_file_size: Option<u64>,
+        estimated_completion: Option<DateTime<Utc>>
+    }
+
+POST /api/v1/biomedical/import/optimizers
+    Request: {
+        import_source: ImportSource,
+        import_format: ImportFormat,
+        validation_config: ImportValidationConfig,
+        storage_config: StorageConfig
+    }
+    Response: {
+        import_job_id: JobId,
+        import_status: ImportStatus,
+        estimated_optimizer_count: Option<usize>,
+        validation_scope: ValidationScope
+    }
+```
+
 #### Content-Specific APIs
 
 ```rust
@@ -1124,6 +1441,32 @@ query {
     }
   }
 }
+```
+
+#### Long-Running Operations Support
+
+For preparation-time intelligence generation and other extended operations:
+
+```rust
+// Long-Running Job Management
+GET /api/v1/jobs/{job_id}/progress-stream
+    Response: Server-Sent Events stream with progress updates
+
+POST /api/v1/jobs/{job_id}/checkpoint
+    Response: {
+        checkpoint_id: CheckpointId,
+        checkpoint_status: CheckpointStatus
+    }
+
+POST /api/v1/jobs/resume-from-checkpoint
+    Request: {
+        checkpoint_id: CheckpointId,
+        resume_options: ResumeOptions
+    }
+    Response: {
+        job_id: JobId,
+        resume_status: ResumeStatus
+    }
 ```
 
 ## Server Architecture
