@@ -1,4 +1,4 @@
-# ZSEI: Technical Documentation - Portion 1: Core Architecture Foundation
+# ZSEI: Technical Documentation
 
 ## Introduction
 
