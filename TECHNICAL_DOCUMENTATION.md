@@ -2630,7 +2630,7 @@ The device network maintains operation despite failures with framework continuit
 
 ## Content Modalities and Guidelines
 
-ZSEI organizes its processing capabilities around seven primary content modalities, each with specific subcategories and guidelines.
+ZSEI organizes its processing capabilities around eight primary content modalities, each with specific subcategories and guidelines, all designed with universal device compatibility as the foundational principle.
 
 ### 1. Code Analysis and Generation
 
