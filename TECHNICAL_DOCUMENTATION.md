@@ -3269,7 +3269,7 @@ Future video processing capabilities will include:
 
 ### System Requirements
 
-ZSEI requires the following resources for optimal operation:
+ZSEI requires the following resources for optimal operation with universal device compatibility:
 
 **Minimum Requirements:**
 - **CPU**: 4+ cores, x86_64 architecture
@@ -3300,46 +3300,78 @@ ZSEI requires the following resources for optimal operation:
 
 ### Performance Characteristics
 
-ZSEI's performance scales with the following characteristics:
+ZSEI's performance scales with universal device compatibility as the foundational design principle:
 
 **Embedding Generation:**
 - Throughput: ~100 embeddings/second on recommended hardware
 - Scaling: Linear with CPU cores up to 16 cores
 - Memory Usage: ~500MB base + ~2MB per active embedding operation
+- Device Adaptation: Automatic adjustment for mobile, edge, desktop, and HPC environments
 
 **Vector Search:**
 - Query Time: <50ms for indices with up to 1M items
 - Scaling: Logarithmic with index size for HNSW indices
 - Memory Usage: ~1GB per million embeddings (384-dimensional)
+- Streaming Support: Handles datasets larger than available memory through intelligent chunking
 
 **Processing Performance:**
-- Code Analysis: ~1000 LOC/second
-- Text Analysis: ~10,000 words/second
-- Document Generation: ~1000 words/minute
-- Long-Running Operations: Stable resource utilization for 24+ hours
+- Code Analysis: ~1000 LOC/second with adaptive processing strategies
+- Text Analysis: ~10,000 words/second with device-appropriate optimization
+- Document Generation: ~1000 words/minute with universal compatibility
+- Long-Running Operations: Stable resource utilization for 24+ hours across all device types
 
 **API Performance:**
 - Request Throughput: Up to 1000 requests/second on recommended hardware
 - Latency: <100ms for simple requests, <1s for complex requests
 - Concurrency: Up to 1000 simultaneous connections
 - WebSocket Channels: Up to 10,000 simultaneous channels
+- Real-Time Coordination: <50ms response time for coordination requests
 
 **Server Performance:**
 - Client Connections: Up to 10,000 simultaneous client connections
 - Task Execution: Up to 1000 concurrent tasks
 - Resource Management: Up to 100 connected devices
 - State Synchronization: Sub-second replication across server nodes
+- Platform Integration: Support for unlimited pull-based platform connections
 
 **Device Interconnection Performance:**
-- Discovery Time: <5s on local networks
-- Connection Establishment: <2s per device
+- Discovery Time: <5s on local networks with adaptive discovery protocols
+- Connection Establishment: <2s per device with capability negotiation
 - Resource Sharing Overhead: <10% for distributed tasks
 - Data Transfer: Up to network capacity with optimized protocols
 - Reconnection Time: <3s after temporary disconnection
 
+**Neural Architecture Framework Performance:**
+- Training-Time Analysis: 1-24 hours for comprehensive semantic analysis
+- Execution Optimizer Generation: 1-30 minutes per optimizer
+- Runtime Optimization: 2-5 milliseconds using embedded optimizers
+- Pattern Discovery: 30 minutes to 4 hours for cross-architecture learning
+- Hardware Mapping: 5-50 milliseconds per architecture-hardware combination
+
+**Biomedical Genomics Framework Performance:**
+- Preparation-Time Analysis: 1-24 hours for comprehensive biological understanding
+- Biological Optimizer Generation: 1-30 minutes per biological optimizer
+- Runtime Biological Intelligence: 0.1-0.5 milliseconds using embedded biological optimizers
+- Pattern Discovery: 4-48 hours for biological pattern identification
+- Cross-Scale Integration: 10-100 milliseconds for molecular to systemic analysis
+
+**3D Framework Performance:**
+- Spatial Analysis: 1-60 seconds per scene with adaptive complexity handling
+- Content Generation: 5-300 seconds per object with device-appropriate quality
+- Relationship Extraction: 10-500 milliseconds per spatial relationship
+- Animation Processing: 1-30 minutes per animation with temporal optimization
+- Cross-Domain Integration: 50-500 milliseconds for code-3D integration
+
+**Universal Storage Performance:**
+- Analysis Storage: 10-100 MB/second write throughput across all frameworks
+- Optimizer Storage: 1-50 MB/second for execution optimizers (Neural and Biological)
+- Pull-Based Retrieval: 50-500 MB/second for platform data access
+- Federated Search: 100-1000 milliseconds across distributed databases
+- Real-Time Coordination Data: <10ms access time for coordination intelligence
+
 ### Data Models
 
-ZSEI uses the following core data structures:
+ZSEI uses comprehensive data structures that support universal device compatibility:
 
 #### Content
 ```rust
@@ -3350,6 +3382,7 @@ struct Content {
     metadata: HashMap<String, String>,
     created_at: DateTime<Utc>,
     updated_at: DateTime<Utc>,
+    device_compatibility: DeviceCompatibilityProfile,
 }
 
 enum ContentModality {
@@ -3357,6 +3390,7 @@ enum ContentModality {
     Text { format: TextFormat },
     NeuralArchitecture { architecture_type: String },
     ThreeD { content_type: Content3DType },
+    BiomedicalGenomics { data_type: GenomicDataType },
     Image { format: ImageFormat },
     Audio { format: AudioFormat },
     Video { format: VideoFormat },
@@ -3372,6 +3406,8 @@ struct Embedding {
     vector: Vec<f32>,
     dimension: usize,
     created_at: DateTime<Utc>,
+    compression_info: CompressionInfo,
+    device_optimization: DeviceOptimizationMetadata,
 }
 
 enum EmbeddingType {
@@ -3380,6 +3416,8 @@ enum EmbeddingType {
     FeatureLevel { feature_type: String },
     SpatialLevel { spatial_context: String },
     SemanticLevel { semantic_context: String },
+    BiologicalLevel { biological_context: String },
+    NeuralArchitectureLevel { architectural_context: String },
 }
 ```
 
@@ -3392,6 +3430,8 @@ struct ProcessingPlan {
     dependencies: HashMap<String, Vec<String>>,
     created_at: DateTime<Utc>,
     estimated_duration: Duration,
+    device_requirements: DeviceRequirements,
+    framework_coordination: FrameworkCoordinationPlan,
 }
 
 struct ProcessStep {
@@ -3402,6 +3442,34 @@ struct ProcessStep {
     outputs: Vec<ResourceReference>,
     validation_criteria: Option<ValidationCriteria>,
     resources: ResourceRequirements,
+    device_adaptation: DeviceAdaptationStrategy,
+}
+```
+
+#### Execution Optimizer
+```rust
+struct ExecutionOptimizer {
+    id: OptimizerId,
+    framework_type: FrameworkType,
+    optimizer_type: OptimizerType,
+    compressed_intelligence: CompressedIntelligence,
+    performance_characteristics: PerformanceCharacteristics,
+    device_compatibility: DeviceCompatibilityMatrix,
+    creation_metadata: OptimizerCreationMetadata,
+    storage_metadata: OptimizerStorageMetadata,
+}
+
+enum OptimizerType {
+    NeuralArchitecture {
+        architecture_patterns: Vec<ArchitecturePattern>,
+        hardware_mappings: Vec<HardwareMapping>,
+        performance_predictors: Vec<PerformancePredictor>,
+    },
+    BiologicalIntelligence {
+        functional_patterns: Vec<FunctionalPattern>,
+        evolutionary_constraints: Vec<EvolutionaryConstraint>,
+        therapeutic_insights: Vec<TherapeuticInsight>,
+    },
 }
 ```
 
@@ -3418,12 +3486,15 @@ struct Guideline {
     checklists: Vec<Checklist>,
     created_at: DateTime<Utc>,
     updated_at: DateTime<Utc>,
+    methodology_integration: MethodologyIntegration,
+    device_considerations: DeviceAdaptationGuidelines,
 }
 
 struct Checklist {
     id: ChecklistId,
     name: String,
     items: Vec<ChecklistItem>,
+    device_specific_variations: HashMap<DeviceClass, Vec<ChecklistItem>>,
 }
 
 struct ChecklistItem {
@@ -3431,221 +3502,115 @@ struct ChecklistItem {
     description: String,
     completion_criteria: String,
     dependencies: Vec<ChecklistItemId>,
+    device_adaptation_notes: Option<String>,
 }
 ```
 
-#### API
+#### Platform Integration
 ```rust
-struct ApiServer {
-    id: ServerId,
-    address: SocketAddr,
-    endpoints: HashMap<EndpointId, Endpoint>,
-    middleware: Vec<Middleware>,
-    auth_providers: Vec<AuthProvider>,
-    rate_limits: HashMap<EndpointId, RateLimit>,
-    started_at: DateTime<Utc>,
+struct PlatformIntegration {
+    platform_type: PlatformType,
+    integration_mode: IntegrationMode,
+    pull_configuration: PullConfiguration,
+    real_time_coordination: Option<RealTimeCoordinationConfig>,
+    authentication_config: PlatformAuthenticationConfig,
+    data_access_permissions: DataAccessPermissions,
 }
 
-struct Endpoint {
-    id: EndpointId,
-    path: String,
-    method: HttpMethod,
-    handler: Box<dyn EndpointHandler>,
-    auth_required: bool,
-    required_permissions: Vec<Permission>,
-    rate_limit: Option<RateLimit>,
+enum IntegrationMode {
+    PullOnly,
+    PullWithOptionalCoordination,
+    FullCoordination,
 }
 
-struct AuthProvider {
-    id: ProviderId,
-    provider_type: AuthProviderType,
-    configuration: ProviderConfig,
+struct PullConfiguration {
+    supported_data_types: Vec<DataType>,
+    batch_size_limits: BatchSizeLimits,
+    rate_limits: RateLimits,
+    caching_strategy: CachingStrategy,
 }
 
-enum AuthProviderType {
-    ApiKey,
-    OAuth2,
-    Jwt,
-    ClientCertificate,
-}
-```
-
-#### Server
-```rust
-struct ServerInstance {
-    id: ServerId,
-    config: ServerConfig,
-    address: SocketAddr,
-    clients: HashMap<ClientId, ClientConnection>,
-    tasks: HashMap<TaskId, TaskState>,
-    connected_devices: HashMap<DeviceId, DeviceConnection>,
-    resource_pools: HashMap<ResourcePoolId, ResourcePool>,
-    tenants: HashMap<TenantId, TenantState>,
-    started_at: DateTime<Utc>,
-}
-
-struct ClientConnection {
-    id: ClientId,
-    address: SocketAddr,
-    auth_info: AuthInfo,
-    session: Session,
-    connected_at: DateTime<Utc>,
-    last_activity: DateTime<Utc>,
-}
-
-struct DeviceConnection {
-    id: DeviceId,
-    address: SocketAddr,
-    device_info: DeviceInfo,
-    resources: DeviceResources,
-    connected_at: DateTime<Utc>,
-    last_heartbeat: DateTime<Utc>,
-    status: DeviceStatus,
-}
-```
-
-#### Resource Management
-```rust
-struct ResourcePool {
-    id: ResourcePoolId,
-    name: String,
-    resources: Vec<ResourceReference>,
-    allocations: HashMap<AllocationId, ResourceAllocation>,
-    created_at: DateTime<Utc>,
-    last_modified: DateTime<Utc>,
-}
-
-struct ResourceReference {
-    id: ResourceId,
-    resource_type: ResourceType,
-    device_id: DeviceId,
-    capacity: ResourceCapacity,
-    availability: ResourceAvailability,
-}
-
-enum ResourceType {
-    Storage { path: PathBuf, capacity: u64 },
-    Compute { cpu_cores: u32, gpu_id: Option<String> },
-    Memory { ram_mb: u64, swap_mb: u64 },
-    Network { bandwidth_mbps: u32 },
-    Specialized { device_type: String, capabilities: HashMap<String, String> },
-}
-
-struct ResourceAllocation {
-    id: AllocationId,
-    pool_id: ResourcePoolId,
-    resources: Vec<AllocatedResource>,
-    job_id: JobId,
-    allocated_at: DateTime<Utc>,
-    expires_at: Option<DateTime<Utc>>,
-    status: AllocationStatus,
-}
-```
-
-#### Device Interconnection
-```rust
-struct DeviceInfo {
-    id: DeviceId,
-    name: String,
-    device_type: DeviceType,
-    operating_system: OperatingSystem,
-    network_interfaces: Vec<NetworkInterface>,
-    resources: DeviceResources,
-    capabilities: DeviceCapabilities,
-}
-
-struct DeviceResources {
-    cpu: CpuInfo,
-    memory: MemoryInfo,
-    storage: Vec<StorageInfo>,
-    gpu: Option<GpuInfo>,
-    specialized: Vec<SpecializedHardware>,
-}
-
-struct NetworkInterface {
-    name: String,
-    address: IpAddr,
-    mac_address: MacAddr,
-    is_primary: bool,
-    speed_mbps: u32,
-}
-
-struct DiscoveryConfig {
-    methods: Vec<DiscoveryMethod>,
-    network_range: Option<IpRange>,
-    timeout: Duration,
-    required_capabilities: Option<Vec<Capability>>,
-}
-
-enum DiscoveryMethod {
-    Broadcast,
-    ServiceRegistry { url: String },
-    Manual { addresses: Vec<SocketAddr> },
-    ZeroConf,
-    Gateway { address: SocketAddr },
+struct RealTimeCoordinationConfig {
+    enabled: bool,
+    max_concurrent_sessions: usize,
+    timeout_seconds: u64,
+    supported_coordination_types: Vec<CoordinationType>,
 }
 ```
 
 ### API Specifications
 
-ZSEI provides the following core APIs:
+ZSEI provides comprehensive APIs with universal device compatibility:
 
 #### Core API
 ```rust
-// Initialization
+// Initialization with Device Capability Detection
 fn initialize_zsei(config_path: &Path) -> Result<ZseiInstance>;
 
-// Prompt Processing
+// Universal Prompt Processing
 fn process_prompt(instance: &ZseiInstance, prompt: &str) -> Result<ProcessingJob>;
 fn get_job_status(instance: &ZseiInstance, job_id: &JobId) -> Result<JobStatus>;
 fn get_job_results(instance: &ZseiInstance, job_id: &JobId) -> Result<ProcessingResults>;
 
-// Manual Operations
+// Universal Content Operations
 fn create_content(instance: &ZseiInstance, content: &Content) -> Result<ContentId>;
 fn retrieve_content(instance: &ZseiInstance, content_id: &ContentId) -> Result<Content>;
 fn update_content(instance: &ZseiInstance, content_id: &ContentId, new_content: &Content) -> Result<()>;
 fn delete_content(instance: &ZseiInstance, content_id: &ContentId) -> Result<()>;
 
-// Guideline Management
+// Universal Guideline Management
 fn add_guideline(instance: &ZseiInstance, guideline: &Guideline) -> Result<GuidelineId>;
 fn update_guideline(instance: &ZseiInstance, guideline_id: &GuidelineId, new_guideline: &Guideline) -> Result<()>;
 fn get_guideline(instance: &ZseiInstance, guideline_id: &GuidelineId) -> Result<Guideline>;
 fn list_guidelines(instance: &ZseiInstance, filter: &GuidelineFilter) -> Result<Vec<GuidelineSummary>>;
 
-// Index Management
+// Universal Index Management
 fn create_index(instance: &ZseiInstance, config: &IndexConfig) -> Result<IndexId>;
 fn add_to_index(instance: &ZseiInstance, index_id: &IndexId, embedding: &Embedding) -> Result<()>;
 fn search_index(instance: &ZseiInstance, index_id: &IndexId, query: &Embedding, limit: usize) -> Result<Vec<SearchResult>>;
+
+// Platform Integration API
+fn register_platform(instance: &ZseiInstance, platform_config: &PlatformIntegrationConfig) -> Result<PlatformId>;
+fn authenticate_platform(instance: &ZseiInstance, platform_id: &PlatformId, credentials: &PlatformCredentials) -> Result<PlatformSession>;
+fn pull_data(instance: &ZseiInstance, session: &PlatformSession, request: &DataPullRequest) -> Result<PlatformDataResponse>;
+fn coordinate_real_time(instance: &ZseiInstance, session: &PlatformSession, coordination_request: &CoordinationRequest) -> Result<CoordinationResponse>;
 ```
 
 #### Job Management API
 ```rust
-// Job Control
+// Universal Job Control
 fn pause_job(instance: &ZseiInstance, job_id: &JobId) -> Result<()>;
 fn resume_job(instance: &ZseiInstance, job_id: &JobId) -> Result<()>;
 fn cancel_job(instance: &ZseiInstance, job_id: &JobId) -> Result<()>;
 
-// Checkpointing
+// Universal Checkpointing
 fn create_job_checkpoint(instance: &ZseiInstance, job_id: &JobId) -> Result<CheckpointId>;
 fn list_job_checkpoints(instance: &ZseiInstance, job_id: &JobId) -> Result<Vec<CheckpointSummary>>;
 fn resume_from_checkpoint(instance: &ZseiInstance, checkpoint_id: &CheckpointId) -> Result<JobId>;
 
-// Resource Management
+// Adaptive Resource Management
 fn set_job_resource_limits(instance: &ZseiInstance, job_id: &JobId, limits: &ResourceLimits) -> Result<()>;
 fn get_job_resource_usage(instance: &ZseiInstance, job_id: &JobId) -> Result<ResourceUsage>;
+fn adapt_job_to_device(instance: &ZseiInstance, job_id: &JobId, device_profile: &DeviceProfile) -> Result<()>;
 ```
 
 #### Extension API
 ```rust
-// Custom Processor Registration
+// Universal Framework Registration
+fn register_framework(instance: &ZseiInstance, framework: Box<dyn Framework>) -> Result<FrameworkId>;
 fn register_content_processor(instance: &ZseiInstance, processor: Box<dyn ContentProcessor>) -> Result<()>;
 fn register_embedding_generator(instance: &ZseiInstance, generator: Box<dyn EmbeddingGenerator>) -> Result<()>;
 fn register_index_implementation(instance: &ZseiInstance, implementation: Box<dyn IndexImplementation>) -> Result<()>;
+fn register_optimizer_generator(instance: &ZseiInstance, generator: Box<dyn OptimizerGenerator>) -> Result<()>;
 
-// Custom Model Integration
+// Universal Model Integration
 fn register_model(instance: &ZseiInstance, model: Box<dyn Model>) -> Result<ModelId>;
 fn unregister_model(instance: &ZseiInstance, model_id: &ModelId) -> Result<()>;
 fn list_registered_models(instance: &ZseiInstance) -> Result<Vec<ModelSummary>>;
+
+// Device Compatibility Extensions
+fn register_device_adapter(instance: &ZseiInstance, adapter: Box<dyn DeviceAdapter>) -> Result<()>;
+fn register_streaming_strategy(instance: &ZseiInstance, strategy: Box<dyn StreamingStrategy>) -> Result<()>;
 ```
 
 #### API Management API
