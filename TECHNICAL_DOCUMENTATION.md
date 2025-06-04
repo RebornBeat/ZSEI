@@ -5653,6 +5653,8 @@ log_level = "info"
 data_directory = "/var/lib/zsei"
 tmp_directory = "/tmp/zsei"
 max_parallel_jobs = 4
+enable_device_adaptation = true
+universal_compatibility_mode = true
 
 [resources]
 # Resource management configuration
@@ -5661,24 +5663,31 @@ cpu_limit_percent = 75
 disk_limit_mb = 10240
 checkpoint_interval_seconds = 300
 enable_gpu = true
+adaptive_resource_allocation = true
+streaming_memory_threshold = 0.8
 
 [embedding]
-# Embedding configuration
+# Embedding configuration with device optimization
 default_dimension = 384
 chunk_size = 1024
 chunk_overlap = 128
 enable_multi_vector = true
+device_optimization = true
+compression_enabled = true
+streaming_generation = true
 
 [models]
-# Model configuration
+# Model configuration with device adaptation
 model_type = "PhiMini"
 model_path = "/path/to/phi-mini-model"
 temperature = 0.7
 max_tokens = 2048
 enable_local_inference = true
+device_auto_detection = true
+streaming_inference = true
 
 [indexing]
-# Indexing configuration
+# Indexing configuration with universal compatibility
 vector_store_type = "Hnsw"
 store_metadata = true
 store_content = true
@@ -5687,31 +5696,65 @@ distance_metric = "cosine"
 hnsw_m = 16
 hnsw_ef_construction = 200
 hnsw_ef_search = 100
+device_optimized_indices = true
+streaming_updates = true
 
 [content]
-# Content handling configuration
+# Content handling configuration with adaptive processing
 include_extensions = ["rs", "py", "js", "ts", "md", "txt", "html", "css"]
 exclude_patterns = ["**/target/**", "**/node_modules/**", "**/.git/**"]
 max_content_size_mb = 50
 enable_streaming = true
+adaptive_chunking = true
+device_aware_processing = true
 
 [guidelines]
-# Guideline configuration
+# Guideline configuration with methodology integration
 guideline_directory = "/var/lib/zsei/guidelines"
 enable_dynamic_guidelines = true
 guideline_update_interval_hours = 24
+methodology_storage_enabled = true
+cross_framework_guidelines = true
+device_adaptation_enabled = true
 
 [execution]
-# Execution configuration
+# Execution configuration with device adaptation
 execution_directory = "/var/lib/zsei/executions"
 checkpoint_directory = "/var/lib/zsei/checkpoints"
 max_execution_time_hours = 72
 enable_resumption = true
+device_aware_scheduling = true
+adaptive_timeout_scaling = true
+
+[storage]
+# Universal storage configuration
+primary_storage_backend = "local_filesystem"
+enable_compression = true
+enable_encryption = false
+backup_enabled = true
+version_control_enabled = true
+federated_discovery_enabled = true
+
+[storage.local_filesystem]
+base_path = "/var/lib/zsei/storage"
+compression_level = "standard"
+index_optimization = true
+
+[storage.database]
+connection_string = "sqlite:///var/lib/zsei/zsei.db"
+pool_size = 10
+migration_auto = true
+
+[storage.federated]
+enable_federated_access = true
+discovery_interval_hours = 6
+trust_model = "web_of_trust"
+contribution_policy = "review_required"
 
 [neural_architecture]
 # Neural Architecture Analysis Framework configuration
 enabled = true
-analysis_depth = "comprehensive"  # basic, standard, comprehensive, research
+analysis_depth = "comprehensive"
 hardware_optimization = true
 cross_model_learning = true
 pattern_discovery = true
@@ -5726,9 +5769,9 @@ training_analysis_enabled = true
 runtime_adaptation_enabled = true
 fallback_to_zsei_threshold = 0.75
 performance_monitoring = true
+device_compatibility = "universal"
 
 [neural_architecture.semantic_analysis]
-# Semantic analysis configuration
 attention_analysis_depth = "comprehensive"
 mlp_analysis_depth = "comprehensive"
 normalization_analysis_depth = "standard"
@@ -5742,7 +5785,6 @@ memory_usage_analysis = true
 computational_complexity_analysis = true
 
 [neural_architecture.pattern_discovery]
-# Universal pattern discovery configuration
 cross_architecture_learning = true
 pattern_validation_threshold = 0.8
 minimum_pattern_occurrences = 3
@@ -5755,7 +5797,6 @@ semantic_similarity_threshold = 0.75
 pattern_update_interval_hours = 168
 
 [neural_architecture.hardware_mapping]
-# Hardware mapping configuration
 semantic_hardware_analysis = true
 tensor_core_optimization = true
 memory_hierarchy_optimization = true
@@ -5769,7 +5810,6 @@ mapping_accuracy_threshold = 0.9
 performance_prediction_enabled = true
 
 [neural_architecture.execution_optimizer]
-# Embedded execution optimizer configuration
 optimizer_generation_enabled = true
 optimizer_architecture_auto_design = true
 optimizer_training_epochs = 100
@@ -5783,7 +5823,7 @@ runtime_adaptation_threshold = 0.8
 optimizer_update_frequency = "weekly"
 
 [3d_framework]
-# 3D Framework configuration
+# 3D Framework configuration with spatial intelligence
 enabled = true
 spatial_analysis_enabled = true
 relationship_tracking = true
@@ -5799,9 +5839,9 @@ animation_support = true
 physics_simulation = true
 material_analysis = true
 lighting_analysis = true
+device_compatibility = "universal"
 
 [3d_framework.spatial_analysis]
-# Spatial analysis configuration
 hierarchical_analysis = true
 object_level_analysis = true
 scene_level_analysis = true
@@ -5818,7 +5858,6 @@ volume_analysis = true
 symmetry_analysis = true
 
 [3d_framework.content_generation]
-# 3D content generation configuration
 parametric_generation = true
 procedural_generation = true
 organic_form_generation = true
@@ -5835,7 +5874,6 @@ geometric_accuracy_threshold = 0.99
 spatial_consistency_threshold = 0.95
 
 [3d_framework.spatial_embedding]
-# Spatial embedding configuration
 geometric_embeddings = true
 material_embeddings = true
 animation_embeddings = true
@@ -5851,7 +5889,6 @@ validation_enabled = true
 accuracy_threshold = 0.95
 
 [3d_framework.integration]
-# External tool integration configuration
 blender_integration = true
 threejs_integration = true
 unity_integration = true
@@ -5868,7 +5905,6 @@ export_formats = ["obj", "fbx", "gltf", "dae", "ply", "stl"]
 import_formats = ["obj", "fbx", "gltf", "dae", "ply", "stl", "blend", "max"]
 
 [3d_framework.memory_management]
-# Memory management for 3D processing
 adaptive_chunking = true
 level_of_detail = true
 streaming_enabled = true
@@ -5884,7 +5920,6 @@ texture_compression = true
 geometry_compression = true
 
 [3d_framework.performance]
-# Performance optimization configuration
 gpu_acceleration = true
 cuda_enabled = true
 opencl_enabled = true
@@ -5902,15 +5937,16 @@ memory_pooling = true
 
 [biomedical_genomics]
 # Biomedical Genomics Framework configuration
-biological_intelligence_level = "comprehensive"  # basic, standard, comprehensive, research
-optimizer_generation = "intelligent"  # traditional, smart, intelligent, revolutionary
-storage_management = "user_controlled"  # local_only, user_controlled, genesis_integrated
-execution_platform_compatibility = "universal"  # genesis_only, multi_platform, universal
-device_compatibility = "universal"  # constrained, standard, high_performance, universal
+enabled = true
+biological_intelligence_level = "comprehensive"
+optimizer_generation = "intelligent"
+storage_management = "user_controlled"
+execution_platform_compatibility = "universal"
+device_compatibility = "universal"
 
 [biomedical_genomics.semantic_analysis]
-genomic_analysis_depth = "comprehensive"  # basic, standard, comprehensive, research
-functional_annotation_level = "mechanistic"  # structural, functional, mechanistic, therapeutic
+genomic_analysis_depth = "comprehensive"
+functional_annotation_level = "mechanistic"
 evolutionary_analysis_enabled = true
 therapeutic_prediction_enabled = true
 population_analysis_enabled = true
@@ -5929,30 +5965,22 @@ comprehensive_validation = true
 
 [biomedical_genomics.optimizer_generation]
 optimizer_creation_enabled = true
-optimizer_compression_level = "optimal"  # basic, standard, optimal, maximum
-intelligence_embedding_depth = "comprehensive"  # basic, standard, comprehensive, research
-validation_level = "comprehensive"  # basic, standard, comprehensive, research
-performance_optimization = "maximum"  # basic, standard, high, maximum
-platform_compatibility = "universal"  # genesis, multi_platform, universal
+optimizer_compression_level = "optimal"
+intelligence_embedding_depth = "comprehensive"
+validation_level = "comprehensive"
+performance_optimization = "maximum"
+platform_compatibility = "universal"
 
 [biomedical_genomics.storage_management]
 local_storage_enabled = true
 database_storage_enabled = true
-genesis_database_integration = false  # Enable for GENESIS database usage
+shared_database_integration = true
 encryption_enabled = false
 compression_enabled = true
 backup_enabled = true
 version_control_enabled = true
 
-[biomedical_genomics.genesis_database_integration]
-# Only used if genesis_database_integration = true
-connection_timeout = 30
-max_connections = 10
-authentication_method = "api_key"  # api_key, oauth2
-synchronization_enabled = true
-conflict_resolution = "user_preference"  # local_wins, genesis_wins, user_preference
-
-[biomedical_genomics.execution_platform_integration]
+[biomedical_genomics.platform_integration]
 genesis_integration_enabled = true
 generic_platform_support = true
 format_conversion_enabled = true
@@ -5961,7 +5989,7 @@ biological_accuracy_validation = true
 cross_platform_compatibility = true
 
 [biomedical_genomics.performance_optimization]
-preparation_time_optimization = "comprehensive"  # basic, standard, comprehensive
+preparation_time_optimization = "comprehensive"
 optimizer_size_optimization = true
 memory_efficiency_optimization = true
 storage_efficiency_optimization = true
@@ -5993,62 +6021,8 @@ system_feedback_integration = true
 therapeutic_optimization_integration = true
 real_time_enhancement = true
 
-[biomedical_genomics.storage_backends]
-# Local filesystem storage configuration
-[biomedical_genomics.storage_backends.local_filesystem]
-enabled = true
-base_path = "~/.zsei_biomedical/optimizers"
-format = "compressed_json"  # json, binary, messagepack, compressed_json
-encryption = false
-backup_enabled = true
-
-# Local database storage configuration
-[biomedical_genomics.storage_backends.local_database]
-enabled = false
-database_type = "sqlite"  # sqlite, postgresql, mysql
-connection_string = "~/.zsei_biomedical/optimizers.db"
-encryption = false
-backup_enabled = true
-
-# GENESIS database storage configuration (optional)
-[biomedical_genomics.storage_backends.genesis_database]
-enabled = false
-api_endpoint = "https://genesis.api.endpoint"
-authentication = "api_key"
-synchronization_interval = 3600  # seconds
-conflict_resolution = "user_preference"
-
-[biomedical_genomics.export_formats]
-genesis_format = true
-generic_json = true
-binary_format = true
-compressed_format = true
-metadata_included = true
-
-[biomedical_genomics.analytics_and_reporting]
-intelligence_quality_analysis = true
-performance_impact_analysis = true
-comparative_analysis = true
-trend_analysis = true
-interactive_dashboards = true
-comprehensive_reporting = true
-
-[biomedical_genomics.data_sources]
-genomic_data_formats = ["vcf", "bed", "gff", "fasta", "fastq", "bam", "sam"]
-expression_data_formats = ["csv", "tsv", "h5", "mtx", "h5ad"]
-clinical_data_formats = ["json", "xml", "csv", "hl7_fhir"]
-multi_omics_formats = ["hdf5", "zarr", "anndata"]
-
-[biomedical_genomics.output_formats]
-optimizer_collections = ["json", "binary", "compressed"]
-analysis_results = ["json", "csv", "html", "pdf"]
-biological_insights = ["markdown", "json", "xml"]
-therapeutic_recommendations = ["json", "pdf", "hl7_fhir"]
-validation_reports = ["html", "pdf", "json"]
-performance_reports = ["json", "html", "csv"]
-
 [api]
-# API configuration
+# API configuration with platform integration support
 enabled = true
 bind_address = "0.0.0.0"
 port = 8801
@@ -6063,9 +6037,27 @@ enable_graphql = true
 graphql_endpoint = "/api/v1/graphql"
 enable_websocket = true
 websocket_endpoint = "/api/v1/ws"
+platform_integration_enabled = true
+enable_real_time_coordination = true
+coordination_api_timeout_seconds = 30
+max_concurrent_coordination_sessions = 100
+
+[api.platform_access]
+enable_pull_based_access = true
+authentication_methods = ["api_key", "oauth2", "jwt"]
+rate_limiting_per_platform = true
+data_access_logging = true
+performance_monitoring = true
+
+[api.real_time_coordination]
+enable_coordination_api = true
+max_concurrent_sessions = 100
+session_timeout_seconds = 300
+coordination_types = ["analysis", "optimization", "validation", "guidance"]
+performance_monitoring = true
 
 [server]
-# Server configuration
+# Server configuration with device network support
 enabled = false
 bind_address = "0.0.0.0"
 port = 8802
@@ -6082,9 +6074,10 @@ enable_multi_tenant = true
 max_tenants = 10
 enable_metrics = true
 metrics_endpoint = "/metrics"
+device_network_coordination = true
 
 [devices]
-# Device interconnection configuration
+# Device interconnection configuration with universal compatibility
 enable_discovery = true
 discovery_methods = ["broadcast", "zeroconf"]
 discovery_interval_seconds = 60
@@ -6098,7 +6091,106 @@ heartbeat_timeout_seconds = 45
 enable_task_distribution = true
 max_connected_devices = 100
 device_connection_retry_attempts = 3
-```
+universal_compatibility_mode = true
+adaptive_device_detection = true
+
+[frameworks]
+# Framework enable/disable configuration
+code_enabled = true
+text_enabled = true
+neural_architecture_enabled = true
+threed_framework_enabled = true
+biomedical_genomics_enabled = true
+image_enabled = false  # Future framework
+audio_enabled = false  # Future framework
+video_enabled = false  # Future framework
+
+[frameworks.code_config]
+language_support = ["rust", "python", "javascript", "typescript", "go", "java", "c++"]
+analysis_depth = "comprehensive"
+cross_language_analysis = true
+
+[frameworks.text_config]
+document_types = ["markdown", "plain_text", "html", "pdf"]
+semantic_analysis = true
+cross_document_analysis = true
+
+[frameworks.neural_config]
+# Configuration delegated to [neural_architecture] section
+delegate_to_neural_architecture_section = true
+
+[frameworks.threed_config]
+# Configuration delegated to [3d_framework] section
+delegate_to_3d_framework_section = true
+
+[frameworks.biomedical_config]
+# Configuration delegated to [biomedical_genomics] section
+delegate_to_biomedical_genomics_section = true
+
+[platform_integrations]
+# Platform integration configurations
+[platform_integrations.omex]
+enabled = true
+pull_access_enabled = true
+supported_data_types = ["neural_optimizers", "neural_analysis", "general_analysis"]
+authentication_method = "api_key"
+rate_limit_requests_per_hour = 1000
+real_time_coordination_enabled = true
+
+[platform_integrations.genesis]
+enabled = true
+pull_access_enabled = true
+supported_data_types = ["biological_optimizers", "biological_analysis", "general_analysis"]
+authentication_method = "api_key"
+rate_limit_requests_per_hour = 1000
+real_time_coordination_enabled = true
+
+[platform_integrations.custom]
+enabled = true
+registration_required = true
+supported_data_types = ["general_analysis", "embeddings", "metadata"]
+authentication_method = "api_key"
+rate_limit_requests_per_hour = 500
+real_time_coordination_enabled = false
+
+[methodology_storage]
+# Framework methodology storage configuration
+enabled = true
+storage_backend = "database"
+version_control = true
+cross_framework_linking = true
+methodology_validation = true
+
+[methodology_storage.neural_architecture]
+store_architectural_methodologies = true
+store_optimization_methodologies = true
+store_pattern_discovery_methodologies = true
+
+[methodology_storage.biomedical_genomics]
+store_biological_analysis_methodologies = true
+store_therapeutic_methodologies = true
+store_patient_analysis_methodologies = true
+
+[methodology_storage.3d_framework]
+store_spatial_analysis_methodologies = true
+store_content_generation_methodologies = true
+store_integration_methodologies = true
+
+[analytics]
+# Analytics and monitoring configuration
+enable_performance_analytics = true
+enable_usage_analytics = true
+enable_platform_analytics = true
+analytics_retention_days = 90
+real_time_monitoring = true
+
+[security]
+# Security configuration
+enable_encryption_at_rest = false
+enable_audit_logging = true
+authentication_required = true
+authorization_enabled = true
+security_monitoring = true
 
 ## Security Considerations
 
